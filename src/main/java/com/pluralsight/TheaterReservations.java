@@ -8,26 +8,36 @@ public class TheaterReservations {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Enter you full name: ");
-        String fullName = input.nextLine().trim();
+        System.out.print("Please enter your name: ");
+        String fullName = input.nextLine();
 
-        System.out.print("What date will you be coming (MM/dd/yyyy):");
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate reservationDate = LocalDate.parse(input.nextLine().trim(), format);
+        String[] parseName = fullName.split(" ");
 
-        System.out.print("How many tickets would you like?");
-        int numberOfTickets = input.nextInt();
 
-        if  (numberOfTickets <= 0) {
-            System.out.println("Please enter a positive integer");
-        }else if (numberOfTickets == 1) {
-            System.out.printf("%d ticket reserved for %tm/%td/%tY under %s",
-                    numberOfTickets, reservationDate, reservationDate, reservationDate, fullName);
-        }else if (numberOfTickets >= 2) {
-            System.out.printf("%d tickets reserved for %tm/%td/%tY under %s",
-                    numberOfTickets, reservationDate, reservationDate, reservationDate, fullName);
-        }else{
-            System.out.println("Invalid input");
-        }
+       if (parseName.length == 1) {
+           System.out.println("Please enter your full name!!!");
+       } else if (parseName.length == 2) {
+           System.out.print("What date will you be coming (MM/dd/yyyy): ");
+           DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+           LocalDate reservationDate = LocalDate.parse(input.nextLine().trim(), format);
+
+           System.out.print("How many tickets would you like? ");
+           int numberOfTickets = input.nextInt();
+
+           if (numberOfTickets <= 0){
+               System.out.println("Please enter a positive integer");
+           }else if (numberOfTickets == 1) {
+               System.out.printf("%d ticket reserved for %tF under %s, %s",
+                       numberOfTickets, reservationDate, parseName[1] , parseName[0] );
+           } else {
+               System.out.printf("%d tickets reserved for %tF under %s, %s",
+                       numberOfTickets, reservationDate, parseName[1] , parseName[0]);
+           }
+       }else {
+           System.out.println("Please enter your full name!!!");
+       }
+
+
+
     }
 }
